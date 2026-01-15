@@ -2,23 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Where should you start with Excel + AI?</title>
+  <title>Excel + AI Diagnostic | Stringfest Analytics</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      max-width: 720px;
+      max-width: 760px;
       margin: 40px auto;
       padding: 0 16px;
       line-height: 1.6;
+      color: #111;
     }
+
+    header {
+      margin-bottom: 32px;
+    }
+
+    header img {
+      max-width: 220px;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      color: #555;
+      margin-top: 4px;
+    }
+
     h1, h2 {
       line-height: 1.3;
     }
+
+    #intro {
+      margin-bottom: 40px;
+    }
+
+    #startBtn {
+      margin-top: 24px;
+      padding: 14px 20px;
+      font-size: 18px;
+      background: #111;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    #startBtn:hover {
+      background: #333;
+    }
+
     .question {
       margin-bottom: 32px;
     }
-    button {
+
+    button.answer {
       display: block;
       margin: 12px 0;
       padding: 12px 16px;
@@ -26,34 +63,82 @@
       width: 100%;
       text-align: left;
       cursor: pointer;
+      background: #f5f5f5;
+      border: 1px solid #ccc;
     }
+
+    button.answer:hover {
+      background: #eee;
+    }
+
     .result {
       border-top: 1px solid #ccc;
       margin-top: 40px;
       padding-top: 24px;
     }
+
+    .cta {
+      margin-top: 16px;
+    }
+
     .cta a {
       display: inline-block;
-      margin-top: 12px;
+      margin-right: 16px;
+      margin-top: 8px;
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: 500;
+    }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
+      font-size: 14px;
+      color: #666;
     }
   </style>
 </head>
+
 <body>
 
-<h1>Where should you start with Excel + AI?</h1>
-<p>
-This short diagnostic helps you figure out whether you should be thinking about
-<strong>individual learning</strong>, <strong>team training</strong>, or a
-<strong>system-level transformation</strong>.
-</p>
+<header>
+  <a href="https://stringfestanalytics.com">
+    <img src="./logo.jpg" alt="Stringfest Analytics logo">
+  </a>
+  <p>Analytics & AI for Modern Excel</p>
+</header>
 
-<div id="quiz"></div>
+<div id="intro">
+  <h1>Where should you start with Excel + AI?</h1>
+  <p>
+    This short diagnostic helps you figure out whether you should be thinking
+    about <strong>individual learning</strong>, <strong>team training</strong>,
+    or a <strong>system-level transformation</strong>.
+  </p>
+
+  <button id="startBtn">Start the diagnostic →</button>
+</div>
+
+<div id="quiz" style="display:none;"></div>
 
 <div id="result" class="result" style="display:none;"></div>
+
+<footer>
+  <p>
+    Built by <strong>Stringfest Analytics</strong>.  
+    I don’t fix spreadsheets. I build capability and durable Excel systems.
+  </p>
+  <p>
+    <a href="https://stringfestanalytics.com">Return to StringfestAnalytics.com</a>
+  </p>
+</footer>
 
 <script>
   const quizEl = document.getElementById("quiz");
   const resultEl = document.getElementById("result");
+  const introEl = document.getElementById("intro");
+  const startBtn = document.getElementById("startBtn");
 
   let score = {
     individual: 0,
@@ -111,6 +196,7 @@ This short diagnostic helps you figure out whether you should be thinking about
 
     q.answers.forEach(a => {
       const btn = document.createElement("button");
+      btn.className = "answer";
       btn.textContent = a.text;
       btn.onclick = () => {
         score[a.type]++;
@@ -140,12 +226,13 @@ This short diagnostic helps you figure out whether you should be thinking about
       html = `
         <h2>Start with Individual Learning</h2>
         <p>
-          Your main constraint isn’t Excel itself, it’s relying on memory and
-          ad hoc patterns. The biggest win is building stronger fundamentals
-          so your work feels predictable and easier to maintain.
+          Your main constraint isn’t Excel itself. It’s relying on memory and
+          one-off patterns. Building stronger fundamentals will make your work
+          easier to trust and maintain.
         </p>
         <div class="cta">
           <a href="https://stringfestanalytics.com/courses">Explore courses →</a>
+          <a href="https://stringfestanalytics.com">Back to home →</a>
         </div>
       `;
     }
@@ -154,12 +241,12 @@ This short diagnostic helps you figure out whether you should be thinking about
       html = `
         <h2>Start with Team Training</h2>
         <p>
-          Your challenge is inconsistency. Different people, different patterns,
-          different assumptions. Targeted team training can create shared
-          language and fewer errors fast.
+          The biggest challenge here is inconsistency. Targeted training can
+          establish shared patterns and reduce errors quickly.
         </p>
         <div class="cta">
-          <a href="https://stringfestanalytics.com/training">View team training options →</a>
+          <a href="https://stringfestanalytics.com/training">View team training →</a>
+          <a href="https://stringfestanalytics.com">Back to home →</a>
         </div>
       `;
     }
@@ -168,12 +255,13 @@ This short diagnostic helps you figure out whether you should be thinking about
       html = `
         <h2>You’re in Transformation Territory</h2>
         <p>
-          Excel is business-critical for you. The issue isn’t skill, it’s
-          system design. This is where pipelines, documentation, and
-          AI-ready workflows matter.
+          Excel is business-critical for you. The problem isn’t skill, it’s
+          system design. This is where pipelines, documentation, and AI-ready
+          workflows matter.
         </p>
         <div class="cta">
-          <a href="https://stringfestanalytics.com/programs">Explore transformation programs →</a>
+          <a href="https://stringfestanalytics.com/programs">Explore programs →</a>
+          <a href="https://stringfestanalytics.com">Back to home →</a>
         </div>
       `;
     }
@@ -182,7 +270,11 @@ This short diagnostic helps you figure out whether you should be thinking about
     resultEl.style.display = "block";
   }
 
-  renderQuestion();
+  startBtn.onclick = () => {
+    introEl.style.display = "none";
+    quizEl.style.display = "block";
+    renderQuestion();
+  };
 </script>
 
 </body>
