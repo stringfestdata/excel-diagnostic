@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Where should you start with Excel + AI?</title>
+  <title>Excel + AI Diagnostic | Stringfest Analytics</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -11,13 +11,31 @@
       margin: 40px auto;
       padding: 0 16px;
       line-height: 1.6;
+      color: #111;
     }
+
+    header {
+      margin-bottom: 32px;
+    }
+
+    header img {
+      max-width: 220px;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      color: #555;
+      margin-top: 4px;
+    }
+
     h1, h2 {
       line-height: 1.3;
     }
+
     .question {
       margin-bottom: 32px;
     }
+
     button {
       display: block;
       margin: 12px 0;
@@ -26,19 +44,49 @@
       width: 100%;
       text-align: left;
       cursor: pointer;
+      background: #f5f5f5;
+      border: 1px solid #ccc;
     }
+
+    button:hover {
+      background: #eee;
+    }
+
     .result {
       border-top: 1px solid #ccc;
       margin-top: 40px;
       padding-top: 24px;
     }
+
+    .cta {
+      margin-top: 16px;
+    }
+
     .cta a {
       display: inline-block;
-      margin-top: 12px;
+      margin-right: 16px;
+      margin-top: 8px;
+      text-decoration: none;
+      color: #0066cc;
+    }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
+      font-size: 14px;
+      color: #666;
     }
   </style>
 </head>
 <body>
+
+<header>
+  <a href="https://stringfestanalytics.com">
+    <img src="logo.jpg" alt="Stringfest Analytics logo">
+  </a>
+  <p>Analytics & AI for Modern Excel</p>
+</header>
 
 <h1>Where should you start with Excel + AI?</h1>
 <p>
@@ -51,139 +99,10 @@ This short diagnostic helps you figure out whether you should be thinking about
 
 <div id="result" class="result" style="display:none;"></div>
 
-<script>
-  const quizEl = document.getElementById("quiz");
-  const resultEl = document.getElementById("result");
-
-  let score = {
-    individual: 0,
-    team: 0,
-    org: 0
-  };
-
-  const questions = [
-    {
-      text: "Which best describes your situation?",
-      answers: [
-        { text: "I’m responsible for my own Excel work", type: "individual" },
-        { text: "I manage or support a small team using Excel", type: "team" },
-        { text: "Excel is business-critical across teams or departments", type: "org" }
-      ]
-    },
-    {
-      text: "What breaks first when things get busy?",
-      answers: [
-        { text: "I forget steps or redo work", type: "individual" },
-        { text: "People do things differently", type: "team" },
-        { text: "Reports quietly lose trust", type: "org" }
-      ]
-    },
-    {
-      text: "How often does Excel work get handed off?",
-      answers: [
-        { text: "Rarely or never", type: "individual" },
-        { text: "Sometimes, within the team", type: "team" },
-        { text: "Frequently, across roles or teams", type: "org" }
-      ]
-    },
-    {
-      text: "What would help the most right now?",
-      answers: [
-        { text: "Stronger fundamentals and confidence", type: "individual" },
-        { text: "Shared patterns and fewer errors", type: "team" },
-        { text: "Reliable, auditable workflows", type: "org" }
-      ]
-    }
-  ];
-
-  let currentQuestion = 0;
-
-  function renderQuestion() {
-    quizEl.innerHTML = "";
-    const q = questions[currentQuestion];
-
-    const div = document.createElement("div");
-    div.className = "question";
-
-    const h2 = document.createElement("h2");
-    h2.textContent = q.text;
-    div.appendChild(h2);
-
-    q.answers.forEach(a => {
-      const btn = document.createElement("button");
-      btn.textContent = a.text;
-      btn.onclick = () => {
-        score[a.type]++;
-        currentQuestion++;
-        if (currentQuestion < questions.length) {
-          renderQuestion();
-        } else {
-          showResult();
-        }
-      };
-      div.appendChild(btn);
-    });
-
-    quizEl.appendChild(div);
-  }
-
-  function showResult() {
-    quizEl.style.display = "none";
-
-    const winner = Object.keys(score).reduce((a, b) =>
-      score[a] > score[b] ? a : b
-    );
-
-    let html = "";
-
-    if (winner === "individual") {
-      html = `
-        <h2>Start with Individual Learning</h2>
-        <p>
-          Your main constraint isn’t Excel itself, it’s relying on memory and
-          ad hoc patterns. The biggest win is building stronger fundamentals
-          so your work feels predictable and easier to maintain.
-        </p>
-        <div class="cta">
-          <a href="https://stringfestanalytics.com/courses">Explore courses →</a>
-        </div>
-      `;
-    }
-
-    if (winner === "team") {
-      html = `
-        <h2>Start with Team Training</h2>
-        <p>
-          Your challenge is inconsistency. Different people, different patterns,
-          different assumptions. Targeted team training can create shared
-          language and fewer errors fast.
-        </p>
-        <div class="cta">
-          <a href="https://stringfestanalytics.com/training">View team training options →</a>
-        </div>
-      `;
-    }
-
-    if (winner === "org") {
-      html = `
-        <h2>You’re in Transformation Territory</h2>
-        <p>
-          Excel is business-critical for you. The issue isn’t skill, it’s
-          system design. This is where pipelines, documentation, and
-          AI-ready workflows matter.
-        </p>
-        <div class="cta">
-          <a href="https://stringfestanalytics.com/programs">Explore transformation programs →</a>
-        </div>
-      `;
-    }
-
-    resultEl.innerHTML = html;
-    resultEl.style.display = "block";
-  }
-
-  renderQuestion();
-</script>
-
-</body>
-</html>
+<footer>
+  <p>
+    Built by <strong>Stringfest Analytics</strong>.  
+    I don’t fix spreadsheets. I build capability and durable Excel systems.
+  </p>
+  <p>
+    <a href="https://stringfesta
